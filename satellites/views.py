@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializers import SatelliteSerializer
 from .models import Satellite
-import requests, tle2czml, os
+# import requests, tle2czml, os
 
 
 @api_view(['GET'])
