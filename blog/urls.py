@@ -10,11 +10,11 @@ urlpatterns = [
   # path('user/<int:id>/posts', views.user_posts),
   # path('user/<int:id>/comments', views.user_comments),
 
-  path('posts', views.posts),
-  path('posts/<int:id>', views.get_post),
-  path('posts/create', views.create_post),
-  path('posts/update/<int:id>', views.update_post),
-  path('posts/delete/<int:id>', views.delete_post),
+  path('', views.posts),
+  path('<int:id>', views.get_post),
+  path('create', views.create_post),
+  path('update/<int:id>', views.update_post),
+  path('delete/<int:id>', views.delete_post),
 
   path('comments/create', views.create_comment),
   path('comments/update/<int:id>', views.update_comment),
