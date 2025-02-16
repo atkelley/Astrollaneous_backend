@@ -6,6 +6,7 @@ class SatelliteSerializer(serializers.ModelSerializer):
   class Meta:
     model = Satellite
     fields = ('id',
+              'name',
               'acronym',
               'type',
               'title',

@@ -3,6 +3,7 @@ import misaka
 
 
 class Satellite(models.Model):
+  name = models.CharField(max_length=200)
   acronym = models.CharField(max_length=200)
   type = models.CharField(max_length=200)
   title = models.CharField(max_length=200)

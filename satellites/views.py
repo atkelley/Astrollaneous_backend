@@ -31,7 +31,7 @@ def satellite(request, name):
     result = None
     for satellite in satellites_list:
       for key, value in satellite.items():
-        if key == 'acronym' and value == name:
+        if key == 'name' and value == name:
           result = satellite
           break
 
