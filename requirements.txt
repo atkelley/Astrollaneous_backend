@@ -14,7 +14,7 @@ psycopg2==2.9.9
 requests==2.32.3
 setuptools==56.0.0
 sqlparse==0.4.4
-tle2czml==0.3
+tle2czml==0.2
 typing_extensions==4.11.0
 tzdata==2024.1
 uvicorn==0.30.6
