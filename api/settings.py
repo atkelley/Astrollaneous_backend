@@ -31,16 +31,25 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-  "blog.apps.BlogConfig",
-  "satellites.apps.SatellitesConfig",
-  "rest_framework",
   "django.contrib.admin",
   "django.contrib.auth",
   "django.contrib.contenttypes",
   "django.contrib.sessions",
   "django.contrib.messages",
   "django.contrib.staticfiles",
+  "rest_framework",
+  "rest_framework_simplejwt",
+  "knox",
+  "blog.apps.BlogConfig",
+  "satellites.apps.SatellitesConfig",
+  "users.apps.UsersConfig",
 ]
+
+REST_FRAMEWORK = {
+  'DEFAULT_AUTHENTICATION_CLASSES': (
+    'rest_framework_simplejwt.authentication.JWTAuthentication',
+  ),
+}
 
 MIDDLEWARE = [
   "django.middleware.security.SecurityMiddleware",
@@ -72,9 +81,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "api.wsgi.application"
 
-CORS_ALLOWED_ORIGINS = [
-  'http://localhost:5173'
-]
+CORS_ALLOWED_ORIGINS = ['http://localhost:5173']
 
 STATIC_ROOT = BASE_DIR/'staticfiles'
 
@@ -93,18 +100,10 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-  {
-    "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-  },
-  {
-    "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-  },
-  {
-    "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-  },
-  {
-    "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-  },
+  { "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator", },
+  { "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator", },
+  { "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator", },
+  { "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator", },
 ]
 
 

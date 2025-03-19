@@ -15,7 +15,7 @@ from .models import Post, Comment
 
 # POSTS ###################################################################################
 @api_view(['GET'])
-def posts(request):
+def get_posts(request):
   if request.method == 'GET':
     try:
       data = Post.objects.all()
