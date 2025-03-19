@@ -27,7 +27,7 @@ django-pdb==0.6.2
 django-rest-knox==4.2.0
 django-widget-tweaks==1.4.12
 djangorestframework==3.14.0
-djangorestframework-simplejwt==5.2.2
+djangorestframework-simplejwt==5.5.0
 executing==2.1.0
 flatbuffers==23.5.26
 gast==0.5.4
