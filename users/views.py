@@ -6,7 +6,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from rest_framework.parsers import JSONParser
 from rest_framework import status
 
 from .serializers import UserSerializer
@@ -58,3 +57,17 @@ def user_comments(request, id):
       return Response(serializer.data)
     except Comment.DoesNotExist: 
       return JsonResponse({'error': 'Comments not found.'}, status=status.HTTP_404_NOT_FOUND)
+    
+
+@api_view(['DELETE'])  
+def delete_user(request, id):
+  if request.method == 'DELETE':
+    try:
+      user = User.objects.get(pk=id)
+    except User.DoesNotExist:
+      return False  
+
+    Comment.objects.filter(user=user).delete()
+    Post.objects.filter(author=user).delete()
+    user.delete()
+    return True

@@ -38,18 +38,11 @@ INSTALLED_APPS = [
   "django.contrib.messages",
   "django.contrib.staticfiles",
   "rest_framework",
-  "rest_framework_simplejwt",
   "knox",
   "blog.apps.BlogConfig",
   "satellites.apps.SatellitesConfig",
   "users.apps.UsersConfig",
 ]
-
-REST_FRAMEWORK = {
-  'DEFAULT_AUTHENTICATION_CLASSES': (
-    'rest_framework_simplejwt.authentication.JWTAuthentication',
-  ),
-}
 
 MIDDLEWARE = [
   "django.middleware.security.SecurityMiddleware",
