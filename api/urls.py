@@ -23,5 +23,7 @@ urlpatterns = [
   path("blog/", include("blog.urls")),
   path("satellites/", include("satellites.urls")),
   path("users/", include("users.urls")),
+  path("nasa/<str:id>", views.nasa, name="nasa"),
+  path("nasa", views.nasa, name="nasa"),
   path("admin/", admin.site.urls),
 ]

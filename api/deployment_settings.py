@@ -21,7 +21,7 @@ MIDDLEWARE = [
   "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = ["https://astrollaneous.onrender.com"]
+CORS_ALLOWED_ORIGINS = ["https://astrollaneous.onrender.com", "https://astrollaneous-backend.onrender.com/"]
 
 STORAGES = {
   "default":{
