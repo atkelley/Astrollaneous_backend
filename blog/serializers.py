@@ -6,6 +6,7 @@ from users.serializers import UserSerializer
 class CommentSerializer(serializers.ModelSerializer):
   user = UserSerializer(read_only=True)
   post_title = serializers.SerializerMethodField()
+  # post = serializers.PrimaryKeyRelatedField(read_only=True) 
   
   class Meta:
     model = Comment
