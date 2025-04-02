@@ -9,21 +9,39 @@ class UserSerializer(serializers.ModelSerializer):
     fields = ('id', 'username', 'email')
 
 
+
+
+
+
+from django.contrib.auth.models import User
+from rest_framework import serializers
+
 class RegisterSerializer(serializers.ModelSerializer):
-  class Meta:
-    model = User
-    fields = ('id', 'username', 'email', 'password')
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'password', 'email']
+        extra_kwargs = {'password': {'write_only': True}}
 
-  def to_representation(self, instance):
-    data = super().to_representation(instance)
-    for field, value in data.items():
-      if value is None:
-        raise SomeExceptionHere({field: "This field is required."})
-    return data
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        return user
 
-  def create(self, validated_data):
-    user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
-    return user
+
+# class RegisterSerializer(serializers.ModelSerializer):
+#   class Meta:
+#     model = User
+#     fields = ('id', 'username', 'email', 'password')
+
+#   def to_representation(self, instance):
+#     data = super().to_representation(instance)
+#     for field, value in data.items():
+#       if value is None:
+#         raise SomeExceptionHere({field: "This field is required."})
+#     return data
+
+#   def create(self, validated_data):
+#     user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
+#     return user
 
 
 class LoginSerializer(serializers.Serializer):

@@ -1,12 +1,11 @@
 from rest_framework import serializers 
 from .models import Post, Comment
-from django.contrib.auth.models import User
 from users.serializers import UserSerializer
+
 
 class CommentSerializer(serializers.ModelSerializer):
   user = UserSerializer(read_only=True)
   post_title = serializers.SerializerMethodField()
-  # post = serializers.PrimaryKeyRelatedField(read_only=True) 
   
   class Meta:
     model = Comment
@@ -16,9 +15,19 @@ class CommentSerializer(serializers.ModelSerializer):
               'text',
               'post_title',
               'created_date')
+    read_only_fields = ['user', 'created_at']
     
   def get_post_title(self, obj):
     return obj.post.title
+  
+  def create(self, validated_data):
+    return super().create(validated_data)
+
+  def update(self, instance, validated_data):
+    instance.text = validated_data.get('text', instance.text)
+    instance.save()
+    return instance
+  
  
 class PostSerializer(serializers.ModelSerializer):
   user = UserSerializer(read_only=True)
