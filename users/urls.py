@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from .api import UserAPI, RegisterAPI, LoginAPI
 from knox.views import LogoutView
 from . import views
@@ -12,9 +12,9 @@ urlpatterns = [
   path("<int:id>/comments", views.user_comments),
   path("delete/<int:id>", views.delete_user),
 
-  # path("auth", include("knox.urls")),
   path("auth/user", UserAPI.as_view(), name="user"),
   path("auth/login", LoginAPI.as_view(), name="login"),
   path("auth/register", RegisterAPI.as_view(), name="register"),
   path("auth/logout", LogoutView.as_view(), name="logout"),
+  path("auth/validate", views.validate, name="validate"),
 ]

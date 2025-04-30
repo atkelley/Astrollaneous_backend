@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from rest_framework import serializers
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -8,13 +9,6 @@ class UserSerializer(serializers.ModelSerializer):
     model = User
     fields = ('id', 'username', 'email')
 
-
-
-
-
-
-from django.contrib.auth.models import User
-from rest_framework import serializers
 
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,23 +19,6 @@ class RegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
-
-
-# class RegisterSerializer(serializers.ModelSerializer):
-#   class Meta:
-#     model = User
-#     fields = ('id', 'username', 'email', 'password')
-
-#   def to_representation(self, instance):
-#     data = super().to_representation(instance)
-#     for field, value in data.items():
-#       if value is None:
-#         raise SomeExceptionHere({field: "This field is required."})
-#     return data
-
-#   def create(self, validated_data):
-#     user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
-#     return user
 
 
 class LoginSerializer(serializers.Serializer):

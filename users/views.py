@@ -1,16 +1,20 @@
-from django.shortcuts import render
 from django.core import serializers
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import get_object_or_404, render, redirect
-from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 from django.contrib.auth.models import User
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-
 from .serializers import UserSerializer
 from blog.serializers import PostSerializer, CommentSerializer
 from blog.models import Post, Comment
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def validate(request):
+  return Response({'valid': True})
 
 
 @api_view(['GET'])
@@ -33,6 +37,20 @@ def get_user(request, id):
       return Response(user)
     except User.DoesNotExist: 
       return JsonResponse({'error': 'User not found.'}, status=status.HTTP_404_NOT_FOUND)
+    
+
+@api_view(['DELETE'])  
+def delete_user(request, id):
+  if request.method == 'DELETE':
+    try:
+      user = User.objects.get(pk=id)
+    except User.DoesNotExist:
+      return False  
+
+    Comment.objects.filter(user=user).delete()
+    Post.objects.filter(author=user).delete()
+    user.delete()
+    return True
 
 
 @api_view(['GET'])
@@ -58,16 +76,3 @@ def user_comments(request, id):
     except Comment.DoesNotExist: 
       return JsonResponse({'error': 'Comments not found.'}, status=status.HTTP_404_NOT_FOUND)
     
-
-@api_view(['DELETE'])  
-def delete_user(request, id):
-  if request.method == 'DELETE':
-    try:
-      user = User.objects.get(pk=id)
-    except User.DoesNotExist:
-      return False  
-
-    Comment.objects.filter(user=user).delete()
-    Post.objects.filter(author=user).delete()
-    user.delete()
-    return True

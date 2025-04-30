@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
+from datetime import timedelta
 import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,7 +32,6 @@ ALLOWED_HOSTS = ["astrollaneous.fly.dev"]
 
 
 # Application definition
-
 INSTALLED_APPS = [
   "django.contrib.admin",
   "django.contrib.auth",
@@ -116,6 +116,10 @@ SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
+REST_KNOX = {
+  'TOKEN_TTL': timedelta(hours=2),
+  'AUTO_REFRESH': False,
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
